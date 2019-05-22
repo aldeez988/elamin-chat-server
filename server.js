@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express();
 
 app.use(cors())
-
+app.use(express.urlencoded({ extended: true }));
 const welcomeMessage = {
   id: 0,
   from: "Bart",
@@ -20,6 +20,13 @@ const messages = [welcomeMessage]
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
 });
+
+app.post("/quotes", function(request, response){
+const x request.body;
+  console.log(quote);
+  
+});
+
 
 
 
