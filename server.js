@@ -40,10 +40,13 @@ const message=request.body;
 app.get("/messages/search", function(request,response){
   const text = request.query.text
   console.log(text)
+  response.status(201).json(searchForMessage(text))
   
 });
 
-const 
+const searchForMessage=(text)=>{
+  return messages.filter(message=>message.text.includes(text))
+}
 
 
 
