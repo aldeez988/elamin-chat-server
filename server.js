@@ -37,8 +37,13 @@ const message=request.body;
 });
 
 
+app.get("/messages/search", function(request,response){
+  const text = request.query.text
+  console.log(text)
+  
+});
 
-
+const 
 
 
 
