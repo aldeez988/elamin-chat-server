@@ -14,7 +14,7 @@ const welcomeMessage = {
 //This array is our "data store".
 //We will start with one message in the array.
 //Note: messages will be lost when Glitch restarts our server.
-const messages = [welcomeMessage]
+let messages = [welcomeMessage]
 
 
 app.get('/', function(request, response) {
@@ -30,7 +30,7 @@ const message=request.body;
   message.id = messages.length === 1?messages.length:messages.length+1;
   messages.push(message);
   console.log(messages);
-  response.status(201).json(message)
+  response.status(201).json(messages)
 
 });
 
@@ -44,7 +44,9 @@ app.get("/messages/search", function(request,response){
 app.get("/messages/latest", function(request,response){
   const latetTen = latestTen(messages)
   if(messages.length>10){
-    response.json(lat)
+    response.json(latestTen)
+  }else{
+  response.json(messages);
   }
 })
 function searchForMessage(text){
