@@ -38,14 +38,23 @@ const message=request.body;
 app.get("/messages/search", function(request,response){
   const text = request.query.text
   console.log(searchForMessage(text))
-  // response.status(201).json()
+   response.json(searchForMessage(text))
   
 });
-
+app.get("/messages/latest", function(request,response){
+  const latetTen = latestTen(messages)
+  if(messages.length>10){
+    response.json(lat)
+  }
+})
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
 }
 
-
+function latestTen(array){
+  const firstIndex = messages.length-11;
+  const lastIndex = messages.length-1;
+  return messages.slice(firstIndex ,lastIndex)
+}
 
 app.listen(process.env.PORT);
