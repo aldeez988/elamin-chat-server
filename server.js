@@ -24,7 +24,9 @@ app.get('/', function(request, response) {
 
 app.post("/messages", function(request, response){
 const message=request.body;
-  
+  if(!message.from || !message.text){
+    response.status(400).json('Please enter complete data')
+  }
   message.id = messages.length === 1?messages.length:messages.length+1;
   messages.push(message);
   console.log(messages);
