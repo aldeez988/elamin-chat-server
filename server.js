@@ -28,6 +28,7 @@ const message=request.body;
     response.status(400).json('Please enter complete data')
   }
   message.id = messages.length === 1?messages.length:messages.length+1;
+  message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
   response.status(201).json(messages)
