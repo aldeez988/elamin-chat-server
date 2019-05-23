@@ -44,7 +44,7 @@ app.get("/messages/search", function(request,response){
 app.get("/messages/latest", function(request,response){
   const latetTen = latestTen(messages)
   if(messages.length>10){
-    response.json(latestTen)
+    response.json(latetTen)
   }else{
   response.json(messages);
   }
