@@ -24,6 +24,7 @@ app.get('/', function(request, response) {
 
 app.post("/messages", function(request, response){
 const message=request.body;
+  
   message.id = messages.length === 1?messages.length:messages.length+1;
   messages.push(message);
   console.log(messages);
