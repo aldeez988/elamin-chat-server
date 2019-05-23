@@ -39,13 +39,13 @@ const message=request.body;
 
 app.get("/messages/search", function(request,response){
   const text = request.query.text
-  console.log(text)
-  response.status(201).json(searchForMessage(text))
+  console.log(searchForMessage(text))
+  // response.status(201).json()
   
 });
 
-const searchForMessage=(text)=>{
-  return messages.filter(message=>message.text.includes(text))
+function searchForMessage(text){
+  return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
 }
 
 
