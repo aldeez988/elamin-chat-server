@@ -54,8 +54,8 @@ function searchForMessage(text){
 }
 
 function latestTen(array){
-  const firstIndex = messages.length-11;
-  const lastIndex = messages.length-1;
+  const firstIndex = messages.length-10;
+  const lastIndex = messages.length;
   return messages.slice(firstIndex ,lastIndex)
 }
 
