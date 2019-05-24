@@ -63,28 +63,30 @@ app.delete("/messages/delete",function(request,response){
 
  })
 app.post("/messages/update", function(request, response){
-const {id,from ,text}=request.body;
-  console.log("id",id,"from",from , "text",text)
+const data=request.body;
+  // console.log("id",id,"from",from , "text",text)
   // if(!id && !from || !text ){
   //   response.status(400).json('Please enter complete data for update')
   // }
 const mess = messages.map(message=>{
-  console.log(message)
-  if(message.id ===id)
+  console.log("Mao",message)
+  if(message.id ===data.id)
     {
-      if(from && text){
-        message.from =from ;
-        message.text= text;
+     console.log("Elamin")
+        message.from =data.from ;
+        message.text= data.text;
 
-      }else if(text){
-        message.text= text;
-      }
+     
     }
+    console.log("after map",message)
+
+
         return message
 
 
+
 })
-  console.log(messages);
+  console.log(mess);
   response.status(201).json(mess)
 
 });
