@@ -62,6 +62,20 @@ app.delete("/messages/delete",function(request,response){
 
 
  })
+app.update("/messages", function(request, response){
+const message=request.body;
+  if(!message.id && !message.from || !message.text ||){
+    response.status(400).json('Please enter complete data for update')
+  }
+  message.id = messages.length === 1?messages.length:messages.length+1;
+  message.timeSent =new Date();
+  messages.push(message);
+  console.log(messages);
+  response.status(201).json(messages)
+
+});
+
+
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
 }
