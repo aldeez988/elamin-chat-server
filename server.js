@@ -51,7 +51,9 @@ app.get("/messages/latest", function(request,response){
   }
 })
 app.delete("/messages/delete",function(request,response){
- const id =request.query.text;
+ const id =request.query.id;
+  const filteredMessages = messages.filter(message=>message.id !==id)
+  console.log(filteredMessages)
  })
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
