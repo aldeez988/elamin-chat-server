@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors())
 app.use(express.urlencoded({ extended: false }));
-let welcomeMessage = {
+const welcomeMessage = {
   id: 0,
   from: "Bart",
   text: "Welcome to CYF chat system!"
@@ -64,24 +64,21 @@ app.delete("/messages/delete",function(request,response){
  })
 app.post("/messages/update", function(request, response){
 const {id,from ,text}=request.body;
-  // console.log("id",id,"from",from , "text",text)
-  // if(!id && !from || !text ){
-  //   response.status(400).json('Please enter complete data for update')
-  // }
+  console.log("id",id,"from",from , "text",text)
+   if(!id && !from || !text ){
+    response.status(400).json('Please enter complete data for update')
+  }
 const mess = messages.map(message=>{
-  const messageId= message.id;
   console.log("Mao",message)
-  if(messageId ===id)
+  if(message.id ==id)
     {
      console.log("Elamin")
         message.from =from ;
-           console.log("from",message.from)
+        message.text= text;
 
-
-        message.text=text;
      
     }
-    console.log("after map",message)
+    console.log("after",message)
 
 
         return message
