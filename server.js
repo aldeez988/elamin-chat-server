@@ -64,17 +64,19 @@ app.delete("/messages/delete",function(request,response){
  })
 app.post("/messages/update", function(request, response){
 const {id,from ,text}=request.body;
+  console.log("id",id,"from",from , "text",text)
   if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
   }
-messages.forEach(message=>{
+messages = messages.map(message=>{
   if(message.id ===id)
     {
       if(from){
-        message.from =from ;
+       return message.from =from ;
       }else if(text){
         message.text= text;
       }
+      return message
     }
 })
   console.log(messages);
