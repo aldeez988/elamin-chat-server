@@ -54,6 +54,9 @@ app.delete("/messages/delete",function(request,response){
  const id =request.query.id;
   const filteredMessages = messages.filter(message=>message.id !==id)
   console.log(filteredMessages)
+    response.status(201).json(filteredMessages)
+
+
  })
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
