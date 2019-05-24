@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors())
 app.use(express.urlencoded({ extended: false }));
-const welcomeMessage = {
+let welcomeMessage = {
   id: 0,
   from: "Bart",
   text: "Welcome to CYF chat system!"
