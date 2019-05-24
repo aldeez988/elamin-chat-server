@@ -21,6 +21,10 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
   
 });
+app.get("/messages", function(request, response){
+  response.status(200).json(messages)
+
+});
 
 app.post("/messages", function(request, response){
 const message=request.body;
