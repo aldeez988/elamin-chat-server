@@ -71,7 +71,8 @@ const {id,from ,text}=request.body;
 messages = messages.map(message=>{
   if(message.id ==id)
     {
-     console.log("Elamin")
+      if(!from && !text || !text )
+        return 
         message.from =from ;
         message.text= text;
 
