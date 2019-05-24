@@ -50,6 +50,7 @@ app.get("/messages/latest", function(request,response){
   response.json(messages);
   }
 })
+app.delete("")
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
 }
