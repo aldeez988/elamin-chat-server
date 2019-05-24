@@ -68,8 +68,7 @@ const {id,from ,text}=request.body;
   // if(!id && !from || !text ){
   //   response.status(400).json('Please enter complete data for update')
   // }
-  const messageCopy =messages.slice();
-messages = messageCopy.map(message=>{
+messages = messages.map(message=>{
   if(message.id ===id)
     {
       if(from!==""){
