@@ -68,7 +68,8 @@ const {id,from ,text}=request.body;
   // if(!id && !from || !text ){
   //   response.status(400).json('Please enter complete data for update')
   // }
-messages = messages.map(message=>{
+const mess = messages.map(message=>{
+  console.log(message)
   if(message.id ===id)
     {
       if(from!==""){
@@ -76,11 +77,13 @@ messages = messages.map(message=>{
       }else if(text!==""){
         message.text= text;
       }
-      return message
     }
+        return message
+
+
 })
   console.log(messages);
-  response.status(201).json(messages)
+  response.status(201).json(mess)
 
 });
 
