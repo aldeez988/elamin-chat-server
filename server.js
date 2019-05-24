@@ -50,7 +50,9 @@ app.get("/messages/latest", function(request,response){
   response.json(messages);
   }
 })
-app.delete("")
+app.delete("/messages/delete",function(request,response){
+ const id =request.query.text;
+ })
 function searchForMessage(text){
   return messages.filter(message=>message.text.toLowerCase().includes(text.toLowerCase()))
 }
