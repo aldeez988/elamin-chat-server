@@ -62,14 +62,21 @@ app.delete("/messages/delete",function(request,response){
 
 
  })
-app.update("/messages", function(request, response){
-const message=request.body;
-  if(!message.id && !message.from || !message.text ||){
+app.post("/messages/update", function(request, response){
+const {id,from ,text}=request.body;
+  if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
   }
-  message.id = messages.length === 1?messages.length:messages.length+1;
-  message.timeSent =new Date();
-  messages.push(message);
+messages.forEach(message=>{
+  if(message.id ===id)
+    {
+      if(from){
+        message.from =from ;
+      }else if(text){
+        message.text= text;
+      }
+    }
+})
   console.log(messages);
   response.status(201).json(messages)
 
