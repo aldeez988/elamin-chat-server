@@ -72,9 +72,11 @@ const mess = messages.map(message=>{
   console.log(message)
   if(message.id ===id)
     {
-      if(from!==""){
+      if(from && text){
         message.from =from ;
-      }else if(text!==""){
+        message.text= text;
+
+      }else if(text){
         message.text= text;
       }
     }
