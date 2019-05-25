@@ -17,11 +17,11 @@ const welcomeMessage = {
 let messages = [welcomeMessage]
 
 
-app.get('/',cors(),function(request, response) {
+app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
   
 });
-app.get("/messages",cors(), function(request, response){
+app.get("/messages", function(request, response){
   const forwarded = request.headers['x-forwarded-for']
 const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   console.log(ip.split(',')[0])
@@ -29,12 +29,16 @@ const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddre
 
 });
 
-app.post("/messages",cors(),function(request, response){
+app.post("/messages",function(request, response){
+const forwarded = request.headers['x-forwarded-for']
+const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
+  ip=ip.split(',')[0]
 const message=request.body;
   if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
   }
   message.id = getUniqueID(messages.length);
+  message.ip = ip
   message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
@@ -56,7 +60,7 @@ app.get("/messages/:id",function(request,response){
 
 
 //serach message by text
-app.get("/messages/search/:text",cors(),function(request,response){
+app.get("/messages/search/:text",function(request,response){
  const text =request.params.text;
   const filteredMessages = messages.filter(message=>message.text.includes(text))
   console.log(filteredMessages)
@@ -67,7 +71,7 @@ app.get("/messages/search/:text",cors(),function(request,response){
 
 
 //Get the lastest ten messages 
-app.get("/messages/latest",cors(),function(request,response){
+app.get("/messages/latest",function(request,response){
   const latetTen = latestTen(messages)
   if(messages.length>10){
     response.json(latetTen)
@@ -77,7 +81,7 @@ app.get("/messages/latest",cors(),function(request,response){
 })
 
 //Delete message By ID 
-app.delete("/messages/:id",cors(),function(request,response){
+app.delete("/messages/:id",function(request,response){
  const id =request.params.id;
   messages = messages.filter(message=>message.id !=id)
   console.log(messages)
@@ -87,7 +91,7 @@ app.delete("/messages/:id",cors(),function(request,response){
  })
 
 //updating data to test it you need to use postman
-app.patch("/messages",cors(),function(request, response){
+app.patch("/messages",function(request, response){
 const {id,from ,text}=request.query;
   console.log("id",id,"from",from , "text",text)
    if(!id && !from || !text ){
