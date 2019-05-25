@@ -39,13 +39,23 @@ const message=request.body;
 
 });
 
-
-app.get("/messages/search", function(request,response){
+//Search message by text 
+app.get("/messages/searchByText", function(request,response){
   const text = request.query.text
   console.log(searchForMessage(text))
-   response.json(searchForMessage(text))
+   response.status(200).json(searchForMessage(text))
   
 });
+
+
+app.get("/messages/searchById",function(request,response){
+ const id =request.query.id;
+  const filteredMessages = messages.filter(message=>message.id == id)
+  console.log(filteredMessages)
+    response.status(200).json(filteredMessages)
+
+
+ })
 app.get("/messages/latest", function(request,response){
   const latetTen = latestTen(messages)
   if(messages.length>10){
