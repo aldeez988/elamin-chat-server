@@ -29,7 +29,7 @@ const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddre
 
 });
 
-app.post("/messages", function(request, response){
+app.post("/messages",function(request, response){
 const message=request.body;
   if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
@@ -67,7 +67,7 @@ app.get("/messages/search/:text",function(request,response){
 
 
 //Get the lastest ten messages 
-app.get("/messages/latest", function(request,response){
+app.get("/messages/latest",function(request,response){
   const latetTen = latestTen(messages)
   if(messages.length>10){
     response.json(latetTen)
@@ -87,7 +87,7 @@ app.delete("/messages/:id",function(request,response){
  })
 
 //updating data to test it you need to use postman
-app.patch("/messages", function(request, response){
+app.patch("/messages",function(request, response){
 const {id,from ,text}=request.query;
   console.log("id",id,"from",from , "text",text)
    if(!id && !from || !text ){
