@@ -22,6 +22,7 @@ app.get('/', function(request, response) {
   
 });
 app.get("/messages", function(request, response){
+  console.log(request.connection.remoteAddress)
   response.status(200).json(messages)
 
 });
