@@ -37,15 +37,15 @@ messages = messages.map(message=>{
 });
 
 app.post("/messages",function(request, response){
-const forwarded = request.headers['x-forwarded-for']
-let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
-  ip=ip.split(',')[0]
+// const forwarded = request.headers['x-forwarded-for']
+// let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
+//   ip=ip.split(',')[0]
 const message=request.body;
   if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
   }
   message.id = getUniqueID(messages.length);
-  message.ip = ip
+  //message.ip = ip
   message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
