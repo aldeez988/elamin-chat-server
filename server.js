@@ -22,8 +22,15 @@ app.get('/', function(request, response) {
   
 });
 app.get("/messages", function(request, response){
-  const forwarded = request.headers['x-forwarded-for']
-const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
+const forwarded = request.headers['x-forwarded-for']
+let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
+  ip=ip.split(',')[0]
+messages = messages.map(message=>{
+  if(message.ip == ip){ 
+  message.isSameIpAddress = true;
+  }
+  return message
+})
   console.log(ip.split(',')[0])
   response.status(200).json(messages)
 
@@ -31,7 +38,7 @@ const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddre
 
 app.post("/messages",function(request, response){
 const forwarded = request.headers['x-forwarded-for']
-const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
+let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   ip=ip.split(',')[0]
 const message=request.body;
   if(!message.from.length  || !message.text.length){
