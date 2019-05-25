@@ -39,18 +39,11 @@ const message=request.body;
 
 });
 
-//Search messages by text 
-app.get("/messages/searchByText", function(request,response){
-  const text = request.query.text
-  console.log(searchForMessage(text))
-   response.status(200).json(searchForMessage(text))
-  
-});
+;
 
 //serach message by Id 
 app.get("/messages/:id",function(request,response){
  const id =request.params.id;
-  console.log('params',request.params.id)
   const filteredMessages = messages.filter(message=>message.id == id)
   console.log(filteredMessages)
     response.status(200).json(filteredMessages)
@@ -69,8 +62,8 @@ app.get("/messages/latest", function(request,response){
 })
 
 //Delete message By ID 
-app.delete("/messages/delete",function(request,response){
- const id =request.query.id;
+app.delete("/messages/:id",function(request,response){
+ const id =request.params.id;
   const filteredMessages = messages.filter(message=>message.id !==id)
   console.log(filteredMessages)
     response.status(201).json(filteredMessages)
