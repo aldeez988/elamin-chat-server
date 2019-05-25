@@ -31,7 +31,7 @@ const message=request.body;
   if(!message.from || !message.text){
     response.status(400).json('Please enter complete data')
   }
-  message.id = messages.length === 1 && [messages.length-1].id !==
+  message.id = messages.length === 1 && messages[messages.length-1].id != messages.length
     ?messages.length:messages.length+1;
   message.timeSent =new Date();
   messages.push(message);
@@ -40,7 +40,6 @@ const message=request.body;
 
 });
 
-;
 
 //serach message by Id 
 app.get("/messages/:id",function(request,response){
@@ -73,7 +72,7 @@ app.delete("/messages/:id",function(request,response){
  })
 
 //
-app.post("/messages/update", function(request, response){
+app.patch("/messages/update", function(request, response){
 const {id,from ,text}=request.body;
   console.log("id",id,"from",from , "text",text)
    if(!id && !from || !text ){
@@ -112,4 +111,11 @@ function latestTen(array){
   return messages.slice(firstIndex ,lastIndex)
 }
 
+function getUniqueID(id){
+  const idExist= messages.find(message=> message.id == id)
+  if(idExist){
+    const largestID
+  }
+  
+}
 app.listen(process.env.PORT);
