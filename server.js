@@ -31,7 +31,8 @@ const message=request.body;
   if(!message.from || !message.text){
     response.status(400).json('Please enter complete data')
   }
-  message.id = messages.length === 1?messages.length:messages.length+1;
+  message.id = messages.length === 1 && [messages.length-1].id !==
+    ?messages.length:messages.length+1;
   message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
@@ -64,9 +65,9 @@ app.get("/messages/latest", function(request,response){
 //Delete message By ID 
 app.delete("/messages/:id",function(request,response){
  const id =request.params.id;
-  const filteredMessages = messages.filter(message=>message.id !==id)
-  console.log(filteredMessages)
-    response.status(201).json(filteredMessages)
+  messages = messages.filter(message=>message.id !=id)
+  console.log(messages)
+    response.status(201).json(messages)
 
 
  })
