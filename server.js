@@ -70,9 +70,9 @@ app.delete("/messages/:id",function(request,response){
 
  })
 
-//
-app.patch("/messages/update", function(request, response){
-const {id,from ,text}=request.body;
+//updating data to test it you need to use postman
+app.patch("/messages", function(request, response){
+const {id,from ,text}=request.query;
   console.log("id",id,"from",from , "text",text)
    if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
@@ -80,8 +80,9 @@ const {id,from ,text}=request.body;
 messages = messages.map(message=>{
   if(message.id ==id)
     {
-      if(!from && !text || !text )
+      if(!from && !text || !text ){
         return 
+      }
         message.from =from ;
         message.text= text;
 
@@ -95,7 +96,7 @@ messages = messages.map(message=>{
 
 
 })
-  response.status(201).json(messages)
+  response.json(messages).status(201)
 
 });
 
