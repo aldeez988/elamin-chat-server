@@ -25,8 +25,10 @@ app.get("/messages", function(request, response){
 const forwarded = request.headers['x-forwarded-for']
 let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   ip=ip.split(',')[0]
+console.log("ip fron post",ip)
 messages = messages.map(message=>{
   if(message.ip == ip){ 
+    console.log('hi Elamin')
   message.isSameIpAddress = true;
   }else{
      message.isSameIpAddress = false;
