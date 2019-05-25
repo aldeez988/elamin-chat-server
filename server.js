@@ -40,6 +40,7 @@ const message=request.body;
 });
 
 
+
 //serach message by Id 
 app.get("/messages/:id",function(request,response){
  const id =request.params.id;
@@ -49,6 +50,18 @@ app.get("/messages/:id",function(request,response){
 
 
  })
+
+
+//serach message by text
+app.get("/messages/search/:text",function(request,response){
+ const text =request.params.text;
+  const filteredMessages = messages.filter(message=>message.text.includes(text))
+  console.log(filteredMessages)
+    response.status(200).json(filteredMessages)
+
+
+ })
+
 
 //Get the lastest ten messages 
 app.get("/messages/latest", function(request,response){
