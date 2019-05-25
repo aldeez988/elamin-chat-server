@@ -113,7 +113,7 @@ function latestTen(array){
 function getUniqueID(id){
   const idExist= messages.find(message=> message.id == id)
   if(idExist){
-    const largestID = messages.reduce((acc,curr)=>Math.max(acc.id,curr.id)) 
+    const largestID = messages.map(message=>message.id).reduce((acc,curr)=>Math.max(acc,curr)) 
     console.log(largestID)
     return largestID+1
   }
