@@ -31,8 +31,7 @@ const message=request.body;
   if(!message.from || !message.text){
     response.status(400).json('Please enter complete data')
   }
-  message.id = messages.length === 1 && messages[messages.length-1].id != messages.length
-    ?messages.length:messages.length+1;
+  message.id = getUniqueID(messages.length);
   message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
@@ -114,8 +113,11 @@ function latestTen(array){
 function getUniqueID(id){
   const idExist= messages.find(message=> message.id == id)
   if(idExist){
-    const largestID
+    const largestID = messages.reduce((acc,curr)=>Math.max(acc.id,curr.id)) 
+    console.log(largestID)
+    return largestID+1
   }
+  return id
   
 }
 app.listen(process.env.PORT);
