@@ -3,6 +3,7 @@ const cors = require('cors')
 
 const app = express();
 
+//getting client 
 app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 const welcomeMessage = {
@@ -22,7 +23,8 @@ app.get('/', function(request, response) {
   
 });
 app.get("/messages", function(request, response){
-  console.log(request.connection.remoteAddress)
+ 
+  console.log(ip.split(',')[0])
   response.status(200).json(messages)
 
 });
