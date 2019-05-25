@@ -31,7 +31,7 @@ const ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddre
 
 app.post("/messages", function(request, response){
 const message=request.body;
-  if(!message.from || !message.text){
+  if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
   }
   message.id = getUniqueID(messages.length);
