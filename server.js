@@ -48,7 +48,7 @@ app.get("/messages/searchByText", function(request,response){
 });
 
 //serach message by Id 
-app.get("/messages/id",function(request,response){
+app.get("/messages/searchById",function(request,response){
  const id =request.query.id;
   console.log('params',request.params.id)
   const filteredMessages = messages.filter(message=>message.id == id)
