@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors())
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 const welcomeMessage = {
   id: 0,
