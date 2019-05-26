@@ -55,7 +55,7 @@ const message=request.body;
   message.timeSent =new Date();
   messages.push(message);
   console.log(messages);
-  response.status(201).json(messages)
+  response.status(201).json(message)
 
 });
 
