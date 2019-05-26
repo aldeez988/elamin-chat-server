@@ -47,6 +47,7 @@ const forwarded = request.headers['x-forwarded-for']
 let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   ip=ip.split(',')[0]
 const message=request.body;
+  console.log(request.body)
   if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
   }
