@@ -27,8 +27,6 @@ app.get("/messages", function(request, response){
 const forwarded = request.headers['x-forwarded-for']
 let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   ip=ip.split(',')[0];
-    console.log("Request Type:", request.headers["user-agent"])
-    console.log("Request Type:", request.headers["user-agent"].replace(/^;+/i, '').split(" "));
 
 messages = messages.map(message=>{
   if(message.ip==ip){ 
