@@ -3,6 +3,22 @@ const cors = require('cors')
 const bodyParser =require('body-parser')
 const app = express();
 
+app.use(function(req, res, next) {
+  const forwarded = req.headers["x-forwarded-for"];
+  let ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
+  ip = ip.split(",")[0];
+  console.log("Time:", Date());
+  const log = {
+    ip: ip,
+    osAndBrowserDetails: req.headers["user-agent"],
+    requestMethod: req.method,
+    requestBody: req.body,
+    requestDate: new Date()
+  };
+  console.log("Request Log:", log);
+
+  next();
+});
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
