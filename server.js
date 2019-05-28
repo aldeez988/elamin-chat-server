@@ -176,3 +176,8 @@ function getUniqueID(id){
 }
 const server =app.listen(process.env.PORT);
 
+const io = socket(server);
+
+io.on("connection",function(socket){
+  console.log("made socket connection");
+})
