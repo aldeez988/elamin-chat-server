@@ -8,7 +8,6 @@ app.use(function(req, res, next) {
   const forwarded = req.headers["x-forwarded-for"];
   let ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
   ip = ip.split(",")[0];
-  console.log("Time:", Date());
   const log = {
     ip: ip,
     osAndBrowserDetails: req.headers["user-agent"],
@@ -16,7 +15,6 @@ app.use(function(req, res, next) {
     requestBody: req.body,
     requestDate: new Date()
   };
-  console.log("Request Log:", log);
 
   next();
 });
@@ -53,10 +51,8 @@ messages = messages.map(message=>{
   }
   return message
 })
-  console.log("all messages",messages)
 
 
-  console.log(ip.split(',')[0])
   response.status(200).json(messages)
 
 });
@@ -66,7 +62,6 @@ const forwarded = request.headers['x-forwarded-for']
 let ip = forwarded ? forwarded.split(/, /)[0] : request.connection.remoteAddress
   ip=ip.split(',')[0]
 const message=request.body;
-  console.log("body from post",request.body)
   if(!message.from.length  || !message.text.length){
     response.status(400).json('Please enter complete data')
   }
@@ -74,7 +69,6 @@ const message=request.body;
   message.ip = ip
   message.timeSent =new Date();
   messages.push(message);
-  console.log(messages);
   response.status(201).json(message)
 
 });
@@ -85,7 +79,6 @@ const message=request.body;
 app.get("/messages/:id",function(request,response){
  const id =request.params.id;
   const filteredMessages = messages.filter(message=>message.id == id)
-  console.log(filteredMessages)
     response.status(200).json(filteredMessages)
 
 
@@ -96,7 +89,6 @@ app.get("/messages/:id",function(request,response){
 app.get("/messages/search/:text",function(request,response){
  const text =request.params.text;
   const filteredMessages = messages.filter(message=>message.text.includes(text))
-  console.log(filteredMessages)
     response.status(200).json(filteredMessages)
 
 
@@ -117,7 +109,6 @@ app.get("/messages/latest",function(request,response){
 app.delete("/messages/:id",function(request,response){
  const id =request.params.id;
   messages = messages.filter(message=>message.id !=id)
-  console.log(messages)
     response.status(201).json(messages)
 
 
@@ -126,7 +117,6 @@ app.delete("/messages/:id",function(request,response){
 //updating data to test it you need to use postman
 app.patch("/messages",function(request, response){
 const {id,from ,text}=request.query;
-  console.log("id",id,"from",from , "text",text)
    if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
   }
@@ -141,7 +131,6 @@ messages = messages.map(message=>{
 
      
     }
-    console.log("after",message)
 
 
         return message
@@ -168,7 +157,7 @@ function getUniqueID(id){
   const idExist= messages.find(message=> message.id == id)
   if(idExist){
     const largestID = messages.map(message=>message.id).reduce((acc,curr)=>Math.max(acc,curr)) 
-    console.log(largestID)
+    // console.log(largestID)
     return largestID+1
   }
   return id
@@ -179,6 +168,9 @@ const server =app.listen(process.env.PORT);
 const io = socket(server);
 
 io.on("connection",function(socket){
-  console.log("made socket connection",messages);
-  io.sockets.emit("chat",messages)
+  console.log("************made socket connection",messages);
+  socket.on("chat" , function(data){
+    io.sockets.emit("chat",messages)
+  })
+  
 })
