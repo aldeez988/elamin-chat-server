@@ -172,6 +172,6 @@ io.on("connection",function(socket){
   socket.on("chat" , function(data){
     console.log(data)
     io.sockets.emit("chat",messages)
-  })
+  });
   
-})
+});
