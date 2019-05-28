@@ -168,7 +168,7 @@ const server =app.listen(process.env.PORT);
 const io = socket(server);
 
 io.on("connection",function(socket){
-  console.log("************made socket connection",messages);
+  console.log("****made socket connection****");
   socket.on("chat" , function(data){
     console.log(data)
     io.sockets.emit("chat",messages)
