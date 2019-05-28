@@ -170,6 +170,7 @@ const io = socket(server);
 io.on("connection",function(socket){
   console.log("************made socket connection",messages);
   socket.on("chat" , function(data){
+    console.log(data)
     io.sockets.emit("chat",messages)
   })
   
