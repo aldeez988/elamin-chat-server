@@ -115,7 +115,7 @@ app.delete("/messages/:id",function(request,response){
  })
 
 //updating data to test it you need to use postman
-app.patch("/messages",function(request, response){
+app.put("/messages",function(request, response){
 const {id,from ,text}=request.query;
    if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
