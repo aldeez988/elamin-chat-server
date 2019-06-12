@@ -85,7 +85,7 @@ app.get("/messages/:id",function(request,response){
  })
 
 
-//serach message by text
+//search message by text 
 app.get("/messages/search/:text",function(request,response){
  const text =request.params.text;
   const filteredMessages = messages.filter(message=>message.text.includes(text))
