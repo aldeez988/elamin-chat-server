@@ -178,22 +178,22 @@ io.on("connection",function(socket){
 
 
 //******************
-app.put("/messages/:id",function(request, response){
-const {from ,text}=request.body
-console.log(from,text)
-  const id = Number(request.params.id)
-  console.log(id)
-   if(!id && !from || !text ){
-    response.status(400).json('Please enter complete data for update')
-  }
-const message = messages.find(message=>message.id===id)
-  //edit msg in place
-if(message){
-  message.text=text
-}else{
-   response.sendStatus(404)
-}
+// app.put("/messages/:id",function(request, response){
+// const {from ,text}=request.body
+// console.log(from,text)
+//   const id = Number(request.params.id)
+//   console.log(id)
+//    if(!id && !from || !text ){
+//     response.status(400).json('Please enter complete data for update')
+//   }
+// const message = messages.find(message=>message.id===id)
+//   //edit msg in place
+// if(message){
+//   message.text=text
+// }else{
+//    response.sendStatus(404)
+// }
   
-  response.json(message).status(200)
+//   response.json(message).status(200)
 
-});
+// });
