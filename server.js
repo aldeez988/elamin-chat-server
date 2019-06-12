@@ -188,7 +188,7 @@ messages = messages.map(message=>{
   if(message.id ==id)
     {
       if(!from && !text || !text ){
-        return ""
+        return 
       }
         message.from =from ;
         message.text= text;
