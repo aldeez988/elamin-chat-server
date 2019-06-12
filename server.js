@@ -179,29 +179,19 @@ io.on("connection",function(socket){
 
 //******************
 app.put("/messages/:id",function(request, response){
-const {from ,text}=request.query;
-  const id =request.params.id
+const {from ,text}=request.body?request.body:null;
+  const id =Number(request.params.id)
    if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
   }
-messages = messages.map(message=>{
-  if(message.id ==id)
-    {
-      if(!from && !text || !text ){
-        return 
-      }
-        message.from =from ;
-        message.text= text;
-
-     
-    }
-
-
-        return message
-
-
-
-})
-  response.json(messages).status(201)
+const message = messages.find(message=>message.id===id)
+  //edit msg in place
+if(message){
+  message.text=text
+}else{
+   response.sendStatus(404)
+}
+  
+  response.json(message).status(200)
 
 });
