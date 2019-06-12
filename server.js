@@ -175,3 +175,33 @@ io.on("connection",function(socket){
   });
   
 });
+
+
+//******************
+app.put("/messages/:id",function(request, response){
+const {from ,text}=request.query;
+  const id =request.params.id
+   if(!id && !from || !text ){
+    response.status(400).json('Please enter complete data for update')
+  }
+messages = messages.map(message=>{
+  if(message.id ==id)
+    {
+      if(!from && !text || !text ){
+        return ""
+      }
+        message.from =from ;
+        message.text= text;
+
+     
+    }
+
+
+        return message
+
+
+
+})
+  response.json(messages).status(201)
+
+});
