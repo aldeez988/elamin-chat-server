@@ -179,8 +179,10 @@ io.on("connection",function(socket){
 
 //******************
 app.put("/messages/:id",function(request, response){
-const {from ,text}=request.body?request.body:null;
-  const id =Number(request.params.id)
+const {from ,text}=request.body
+console.log(from,text)
+  const id = Number(request.params.id)
+  console.log(id)
    if(!id && !from || !text ){
     response.status(400).json('Please enter complete data for update')
   }
